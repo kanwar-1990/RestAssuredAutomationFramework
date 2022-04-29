@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import com.org.commonPostRequest.PostRequest;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -28,7 +29,7 @@ public class Test_003_PostRequest {
 
 	}
 
-	@Test(enabled=false)
+	@Test(enabled = false)
 	public void getDataPostRequest() {
 		Pr = new PostRequest();
 
@@ -40,33 +41,24 @@ public class Test_003_PostRequest {
 		System.out.println(resp.asString());
 
 	}
-	
+
 	@Test
-	public  void checkUpdateRequest()
-	{
-		
-		Response resp=given()
-		.contentType(ContentType.JSON)
-		.when()
-		.body("{\"title\":\"change it to hello\"}")
-		.patch("http://localhost:3000/posts/2");
-		
+	public void checkUpdateRequest() {
+
+		Response resp = given().contentType(ContentType.JSON).when().body("{\"title\":\"change it to hello\"}")
+				.patch("http://localhost:3000/posts/2");
+
 		System.out.println(resp.asString());
-		//{\"title\":\"change it to hello\"}
-		 
-		
-		
+		// {\"title\":\"change it to hello\"}
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Test
+	public void deleteAPostRequest() {
+		Response resp = given()
+
+				.given().when().body("http://localhost:3000/posts/2").delete();
+
+	}
 
 }
